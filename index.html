@@ -128,3 +128,12 @@
   </script>
 </body>
 </html>   
+
+
+<div id="uploadForm" class="upload-section" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 5px;">
+  <h3>Upload New Chapter</h3>
+  <input type="text" id="chapterTitle" placeholder="Chapter Title" style="width: 100%; padding: 8px; margin: 5px 0; background: transparent; border: 1px solid #64ffda; color: #e6f1ff;">
+  <input type="number" id="chapterNum" placeholder="Chapter Number" style="width: 100%; padding: 8px; margin: 5px 0; background: transparent; border: 1px solid #64ffda; color: #e6f1ff;">
+  <input type="file" id="chapterImages" multiple accept="image/*" style="width: 100%; padding: 8px; margin: 5px 0;">
+  <button onclick="submitChapter()" style="background: #64ffda; color: #0a192f; border: none; padding: 10px 15px; cursor: pointer; margin-top: 10px;">Upload Chapter</button>
+</div>   
