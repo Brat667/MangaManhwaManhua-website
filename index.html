@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TripleM</title>
+  <style>
+    :root {
+      --bg-color: #0a192f;
+      --text-color: #e6f1ff;
+      --accent-color: #64ffda;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .search-bar {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--accent-color);
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .search-input {
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      width: 80%;
+      outline: none;
+      margin-left: 5px;
+    }
+
+    .icon {
+      color: var(--accent-color);
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    #content {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+      min-height: 100px;
+    }
+
+    .results {
+      margin-top: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .result-item {
+      padding: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .result-item:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="search-bar">
+    <span class="icon">search</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+    <span class="icon" onclick="openSettings()">⚙️</span>
+    <span class="icon">star</span>
+    <span class="icon">people</span>
+  </div>
+
+  <div id="content">
+    <div id="searchResults" class="results"></div>
+  </div>
+
+  <script>
+    // Sample data for search
+    const searchData = [
+      "Home", "Dashboard", "Profile", "Settings", "About", 
+      "Contact", "Help", "Documentation", "Updates", "Logout"
+    ];
+
+    // Function to handle search
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+      const query = this.value.toLowerCase();
+      const resultsContainer = document.getElementById('searchResults');
+      resultsContainer.innerHTML = '';
+
+      if (query === '') return;
+
+      const filteredResults = searchData.filter(item => 
+        item.toLowerCase().includes(query)
+      );
+
+      if (filteredResults.length > 0) {
+        filteredResults.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'result-item';
+          div.textContent = item;
+          div.onclick = () => loadContent(item);
+          resultsContainer.appendChild(div);
+        });
+      } else {
+        resultsContainer.innerHTML = '<div class="result-item">No results found</div>';
+      }
+    });
+
+    // Function to load content
+    function loadContent(item) {
+      document.getElementById("content").innerHTML = `
+        <h2>${item} Page</h2>
+        <p>You navigated to the ${item.toLowerCase()} page.</p>
+      `;
+    }
+
+    // Function to open settings
+    function openSettings() {
+      document.getElementById("content").innerHTML = `
+        <h2>⚙️ Settings</h2>
+        <p>Settings menu opened. You can add your configuration options here.</p>
+        <button onclick="loadContent('Home')">Back to Home</button>
+      `;
+    }
+  </script>
+</body>
+</html>   
